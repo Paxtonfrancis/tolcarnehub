@@ -1,0 +1,56 @@
+.FAQintro{
+    text-align: center;
+    font-size: 30px;
+    margin: 30px 20px;
+    color: #000;
+    font-family: Garamond;
+}
+
+h5{
+    text-align: left;
+    font-size: 20px;
+    margin-left: 40px;
+    color: #000;
+    font-family: Avenir;
+} 
+
+
+.collapsible {
+        background-color: #008ecf;
+        color: white;
+        cursor: pointer;
+        padding: 18px;
+        width: 95%;
+        border: none;
+        text-align: left;
+        outline: none;
+        font-size: 25px;
+        display: block;
+        margin: 0 auto; /* this centers the element */
+        text-align: center;
+        font-family: Avenir;
+      }
+      
+.active, .collapsible:hover {
+        background-color: #2183b1;
+      }
+      
+.content {
+    margin: 0 auto;
+    display: none;
+    overflow: hidden;
+    padding: 18px;
+    width: 95%;
+    text-align: center;
+    font-size: 25px;
+    background-color: white;
+    color: #2183b1;
+    font-family: Avenir;
+    border: none;
+
+
+      }
+      .collapsible,
+      .content {
+        box-sizing: border-box;
+      }

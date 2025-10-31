@@ -1,0 +1,152 @@
+html {
+    margin: 0;
+    padding: 0;
+    font-family: Garamond;
+
+  }
+  
+a{
+  text-decoration: none;
+  color: white;
+}
+
+  body {
+    font-family: Garamond;
+    font-size: 16px;
+    background-color: #d6edf999;
+    margin: 0 auto;
+  }
+  
+  
+  h3 {
+    flex-grow: 1;
+  margin: 0;
+  text-align: center;
+  font-family: Garamond;
+  font-size: 50px;
+  color: white;
+  }
+  
+  nav {
+    overflow: visible;
+    background-color: #2183b1;
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    height: 60px;
+  }
+  
+  .logo img {
+    height: 160px; 
+  position: relative; 
+  top: 50px; 
+  z-index: 10; 
+  background-color: transparent;
+  }
+
+  .sidebar {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    right: 0; 
+    background-color: #2183b1;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+  }
+  
+  .sidebar a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: white;
+    display: block;
+    transition: 0.3s;
+  }
+  
+  .sidebar a:hover {
+    color: #f1f1f1;
+  }
+  
+  .sidebar .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+  }
+  
+  .openbtn {
+    font-size: 50px;
+    cursor: pointer;
+    background-color: transparent;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+  }
+  
+  
+  
+  #main {
+    transition: margin-left .5s;
+    padding: 16px;
+  }
+  
+  @media screen and (max-height: 450px) {
+    .sidebar {padding-top: 15px;}
+    .sidebar a {font-size: 18px;}
+  }
+
+  
+ 
+
+  
+  footer {
+    background-color: #2183b1;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    margin-top: 40px;
+    width: 100%;
+    clear: both;
+    box-sizing: border-box;
+  }
+  
+  footer a {
+    color: white;
+    text-decoration: underline;
+  }
+  
+
+  .menuimg{
+    width: 60%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+
+
+  .intro{
+    text-align: center;
+    font-size: 30px;
+    margin: 20px 20px;
+    color: #000;
+    font-family: Garamond;
+}
+
+
+#crest{
+  background: url(images/crest.png) no-repeat right center; 
+  background-size:20%;
+ background-color: #d6edf999;
+}
+
+

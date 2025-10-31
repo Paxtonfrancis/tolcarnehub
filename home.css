@@ -1,0 +1,141 @@
+
+  
+  .tagline {
+    text-align: center;
+    font-size: 30px;
+    margin: 30px 20px;
+    color: #000;
+    font-family: Garamond;
+  }
+  
+  .main-content {
+    display: flex;
+    gap: 70px;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;  
+  }
+  
+ 
+  
+
+
+  * {
+    box-sizing: border-box;
+}
+
+.imgcontainer {
+  max-width: 600px;
+  position: relative;
+  margin: auto;
+}
+
+.mySlides {
+    display: none;
+}
+
+
+.slideimage {
+  width: 100%;
+  max-width: 600px;
+  border: 6px solid white;
+  border-radius: 8px;
+}
+
+.prev,
+.next {
+  display: flex;
+  justify-content: center; 
+  align-items: center;     
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: 30px;
+  height: 30px;
+  margin-top: -10px;      
+  color: #008ecf;
+  background-color: white;
+  font-weight: bold;
+  font-size: 1.5em;
+  border-radius: 50%;
+  user-select: none;
+  padding: 0;
+
+}
+
+
+.next {
+  right: 10px; 
+}
+
+.prev {
+  left: 10px;  
+}
+
+
+.photo-section img {
+    width: 100%;
+    max-width: 1920px;
+    aspect-ratio: 16 / 9; 
+    object-fit: cover;
+    border: 6px solid white;
+    border-radius: 8px;
+    display: block;
+  }
+
+  
+  .dot-container {
+    padding: 20px 0;
+}
+
+.dot {
+    cursor: pointer;
+    height: 15px;
+    width: 15px;
+    margin: 0 5px;
+    background-color: #2498CE;
+    opacity: 80%;
+    border-radius: 50%;
+    display: inline-block;
+    transition: background-color 0.3s ease;
+}
+
+.dot:hover, .dot.active {
+    background-color: #015AA5;
+    opacity: 100%;
+}
+
+.button-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+  justify-content: center;
+  text-decoration: none;
+  font-family: Avenir;
+  font-size:30;
+}
+
+.quick-button {
+  background-color: #008ecf;
+  padding: 20px;
+  text-align: center;
+  border-radius: 25px;
+  text-decoration: none;
+  transition: 0.2s;
+  font-size: 30px;
+  color: white;
+  font-family: Avenir;
+    width: 100%;
+
+}
+
+.quick-button:hover {
+  background-color: #1a73b8;
+    text-decoration: 2px underline white ;
+   
+}
+.quick-button:first-child { /* targets only the first button */
+  width: 205%;      
+  padding: 20px;    
+  font-size: 36px;  /* bigger text for emphasis */
+}

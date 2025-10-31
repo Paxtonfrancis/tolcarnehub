@@ -1,0 +1,128 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+<head>
+    <title>Tolcarne Hub</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="main.css" rel="stylesheet" type="text/css">
+    <link href="contact.css" rel="stylesheet" type="text/css">
+    <link href="images/favicon.png" rel="shortcut icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+</head>
+
+<body id="crest">
+
+  <nav>
+    <div class="logo">
+      <a href="index.html">
+        <img src="images/logo.png" alt="Tolcarne Logo" />
+      </a>
+    </div>
+  
+  
+    <h3>Contact</h3>
+  
+    
+    
+    <div id="mySidebar" class="sidebar">
+      <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+      <a href="index.html">Home</a>
+      <br>
+      <a href="dinnermenu.html">Dinner Menu</a>   
+      <br>      
+      <a href="tolcarneevents.html">Tolcarne Events </a>      
+      <br>
+      <a href="FAQ.html">FAQ </a>   
+      <br>
+      <a href="contact.html">Contact </a>
+       <br>
+    </div>
+    
+    
+    <div id="main">
+      <button class="openbtn" onclick="openNav()">☰</button>  
+     
+
+
+    </div>
+       
+    
+  </nav>
+
+  <div class="intro"> Get In Touch With Tolcarne </div>
+
+<div class="contactinfo"> 
+ 
+  
+    <div class=title> As a Student    - </div> 
+    <br>
+    <div class="student"> 
+    Van - 0800 van 
+    <br>
+    Hostel - 0800 hostel
+    <br>
+    Email - hostel@gmail
+  </div>
+  <br>
+  <br>
+   <div class=title> As a Parent      -  </div> 
+   <br> 
+  <div class="parent">
+    Hostel - 0800hostel 
+    <br>
+    Email - hostel@gmail
+  </div>
+
+</div>
+
+
+<form id="contact-form">
+  <div>
+      <label for="firstname">First Name</label>
+      <input id="firstname" name="firstname" type="text" required>
+  </div>
+  <div>
+      <label for="lastname">Last Name</label>
+      <input id="lastname" name="lastname" type="text" required>
+  </div>
+  <div>
+      <label for="email">Email</label>
+      <input id="email" name="email" type="email" required>
+  </div>
+  <div>
+      <label for="phone">Phone</label>
+      <input id="phone" name="phone" type="text">
+  </div>
+  <div>
+      <label for="message">Comments</label>
+      <textarea id="message" name="message" rows="5"></textarea>
+  </div>
+  <div>
+      <label for="agree">I agree to terms of service</label>
+      <input id="agree" name="agree" type="checkbox" required>
+  </div>
+  <div>
+      <button type="submit">Submit</button>
+  </div>
+</form>
+
+    
+
+  <footer>
+    <p>AS91893 Develop a Digital Media Outcome 4cr</p>
+    <p> &copy; Your Name &#128526; Te Kura </p>
+    <p>Contact information: <a href="mailto:yourname@your.email">Your Name</a>.</p>
+</footer>
+
+</body>
+
+
+<script src="javascript/home.js"> </script>
+<script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+<script>
+    emailjs.init("YvmaurVFJXU7pR9th");
+</script>
+
+</html>

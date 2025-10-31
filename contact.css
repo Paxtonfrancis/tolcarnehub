@@ -1,0 +1,120 @@
+
+form{
+    width: 75%;
+    margin:25px auto 0 auto;
+    color: #015AA5;
+    z-index:1;
+}
+
+
+form div{
+    margin:0 0 15px 0;
+    position: relative;
+    color: #015AA5;
+}
+
+form > div:last-of-type{
+    margin-top: 20px;
+    border-top:1px solid #015AA5;
+    padding-top: 10px;
+}
+
+form input,
+form textarea {
+    padding:5px 12px;
+    outline: none;
+    border: 1px solid black(0,0,0,0);
+    width: 80%;
+    color: #015AA5;
+    font-size: .9emm;
+    background-color: black(255,255,255,.4);
+}
+
+form input[type="submit"] {
+    width:auto;
+    padding: 5px 20px;
+    cursor: pointer;
+    font-size:.8em;
+    color:white;
+    border: 1px solid #015AA5;
+    background-color:#015AA5 ;
+    margin-top:20px;
+    margin-bottom: 20px;
+}
+
+label{
+    display:block;
+}
+
+form input[type="checkbox"]{
+    width:auto;
+    position:relative;
+    top:2px;
+}
+
+form input[type="checkbox"]+ label{
+display: inline;
+padding-left: 10px;
+font-style:normal;
+}
+
+input:required{
+    border: 1px solid #015AA5
+}
+
+input:required + label{
+    color: #015AA5;
+}
+
+input:required + label::after  {
+    content:"- Required";
+    font-style:italic;
+    padding-left: 10px;
+    font:.8em;
+}
+
+input:required + label::before  {
+    content:'';
+    position: absolute;
+    top:-2px;
+    left: -25px;
+    display:block;
+    width:20px;
+    height:40px;
+    background: url(images/favicon.png) no-repeat 0 0;
+    background-size:contain;
+}
+
+#crest{
+   background: url(images/crest.png) no-repeat right center; 
+   background-size:20%;
+  background-color: #d6edf999;
+}
+
+.contactinfo{
+    display: flex;
+    gap: 40px;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap; 
+    font-family: Avenir;
+margin-bottom: 50px;
+}
+
+.title{
+    font-size:30px;
+    color: #000;
+float: left;
+}
+
+.student{ 
+text-align: center;
+font-size: 17px;
+    color: #000;
+}
+
+.parent{ 
+    text-align: center;
+    font-size: 17px;
+        color: #000;
+    }

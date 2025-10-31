@@ -1,0 +1,93 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+<head>
+    <title>Tolcarne Hub</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="main.css" rel="stylesheet" type="text/css">
+    <link href="home.css" rel="stylesheet" type="text/css">
+    <link href="lostnfound.css" rel="stylesheet" type="text/css">
+
+    <link href="images/favicon.png" rel="shortcut icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+</head>
+
+<body id="home">
+
+  <nav>
+    <div class="logo">
+      <a href="index.html"> 
+      <img src="images/logo.png" alt="Tolcarne Logo" />
+    </a>
+    </div> 
+  
+    <h3>Tolcarne Hub</h3>
+    
+    <div id="mySidebar" class="sidebar">
+      <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+      <a href="index.html">Home</a>
+      <br>
+      <a href="dinnermenu.html">Dinner Menu</a>   
+    <br>
+      <a href="tolcarneevents.html">Tolcarne Events </a>   
+      <br>
+      <a href="FAQ.html">FAQ </a>   
+      <br>
+      <a href="contact.html">Contact </a> 
+      
+    </div>
+    
+    <div id="main">
+      <button class="openbtn" onclick="openNav()">☰</button>  
+     
+
+
+    </div>
+       
+    
+  </nav>
+ 
+    <div class="tagline">
+       Lost something? 
+       <br>Maybe you've found something,<br>
+       post it on here and give it to the office
+      </div>
+      <form id="lostForm">
+        <input type="text" id="item_name" placeholder="Item name" required>
+        <textarea id="description" placeholder="Description" required></textarea>
+        <select id="lost_or_found" required>
+          <option value="">Lost or Found?</option>
+          <option value="Lost">Lost</option>
+          <option value="Found">Found</option>
+        </select>
+        <input type="date" id="date" required>
+        <input type="text" id="location" placeholder="Location" required>
+        <input type="text" id="user_id" placeholder="Your name or ID" required>
+        <input type="file" id="image" accept="image/*" required>
+        <button type="submit">Upload Item</button>
+      </form>
+    
+      <h2>Recently Uploaded Items</h2>
+      <div id="items"></div>
+    
+       
+  
+    <footer>
+        <p>AS91893 Develop a Digital Media Outcome 4cr</p>
+        <p> &copy; Paxton Francis &#128526; Te Kura </p>
+        <p>Contact information: <a href="mailto:paxtonfrancis@shcs.school.nz">Paxton Francis</a>.</p>
+
+        
+
+    </footer>
+
+</body>
+
+
+<script src="javascript/home.js"> </script>
+<script src="javascript/slideshowscript.js"> </script>
+<script src="javascript/lostfound.js"></script>
+
+</html>
