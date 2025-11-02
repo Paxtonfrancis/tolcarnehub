@@ -19,85 +19,91 @@ form.addEventListener('submit', async (e) => {
 
   let imageUrl = ''
 
-  // Upload image to Supabase Storage if a file is selected
-  if (fileInput.files.length > 0) {
-    const file = fileInput.files[0]
-    const fileName = `${Date.now()}_${file.name}`
+  try {
+    // ---------------- Image upload ----------------
+    if (fileInput.files.length > 0) {
+      const file = fileInput.files[0]
+      const fileName = `${Date.now()}_${file.name}`
 
-    const { error: uploadError } = await supabase.storage
-      .from('lost-found-images')
-      .upload(fileName, file, { upsert: true })
+      const { error: uploadError } = await supabase.storage
+        .from('lost-found-images')
+        .upload(fileName, file, { upsert: true })
 
-    if (uploadError) {
-      console.error('Upload error:', uploadError)
-      message.textContent = '❌ Error uploading image!'
-      return
+      if (uploadError) throw uploadError
+
+      const { publicURL, error: urlError } = supabase
+        .storage
+        .from('lost-found-images')
+        .getPublicUrl(fileName)
+
+      if (urlError) throw urlError
+
+      imageUrl = publicURL
+      console.log('Image uploaded, URL:', imageUrl)
     }
 
-    // Get public URL
-    const { publicURL, error: urlError } = supabase
-      .storage
-      .from('lost-found-images')
-      .getPublicUrl(fileName)
-
-    if (urlError) {
-      console.error('URL error:', urlError)
-      message.textContent = '❌ Error getting image URL!'
-      return
+    // ---------------- Insert data ----------------
+    const itemData = {
+      item_name: document.getElementById('item_name').value,
+      description: document.getElementById('description').value,
+      lost_or_found: document.getElementById('lost_or_found').value,
+      date: document.getElementById('date').value,
+      location: document.getElementById('location').value,
+      image_url: imageUrl
     }
 
-    imageUrl = publicURL
-  }
+    const { data, error } = await supabase
+      .from('lost_found_items')
+      .insert([itemData])
+      .select() // returns inserted rows
 
-  // Prepare data to insert into Supabase table
-  const itemData = {
-    item_name: document.getElementById('item_name').value,
-    description: document.getElementById('description').value,
-    lost_or_found: document.getElementById('lost_or_found').value,
-    date: document.getElementById('date').value,
-    location: document.getElementById('location').value,
-    image_url: imageUrl
-  }
+    console.log('Insert response:', data, error)
 
-  // Insert into Supabase table
-  const { error } = await supabase.from('lost_found_items').insert([itemData])
+    if (error) throw error
 
-  if (error) {
-    console.error('Insert error:', error)
-    message.textContent = '❌ Error saving item!'
-  } else {
     message.textContent = '✅ Item uploaded successfully!'
     form.reset()
     loadItems()
+
+  } catch (err) {
+    console.error('Error:', err)
+    message.textContent = '❌ Error saving item! Check console for details.'
   }
 })
 
 // ---------------- Load items ----------------
 async function loadItems() {
-  const { data, error } = await supabase
-    .from('lost_found_items')
-    .select('*')
-    .order('id', { ascending: false })
+  try {
+    const { data, error } = await supabase
+      .from('lost_found_items')
+      .select('*')
+      .order('id', { ascending: false })
 
-  if (error) {
-    console.error('Fetch error:', error)
+    if (error) throw error
+
+    itemsList.innerHTML = ''
+    if (!data || data.length === 0) {
+      itemsList.innerHTML = '<p>No items found.</p>'
+      return
+    }
+
+    data.forEach(item => {
+      const div = document.createElement('div')
+      div.className = 'item-card'
+      div.innerHTML = `
+        <h3>${item.item_name}</h3>
+        <p><strong>${item.lost_or_found}</strong> at ${item.location}</p>
+        <p>${item.description || ''}</p>
+        <p><i>${item.date ? new Date(item.date).toLocaleDateString() : ''}</i></p>
+        ${item.image_url ? `<img src="${item.image_url}" alt="${item.item_name}" />` : ''}
+      `
+      itemsList.appendChild(div)
+    })
+
+  } catch (err) {
+    console.error('Fetch error:', err)
     itemsList.innerHTML = '<p>Error loading items.</p>'
-    return
   }
-
-  itemsList.innerHTML = ''
-  data.forEach(item => {
-    const div = document.createElement('div')
-    div.className = 'item-card'
-    div.innerHTML = `
-      <h3>${item.item_name}</h3>
-      <p><strong>${item.lost_or_found}</strong> at ${item.location}</p>
-      <p>${item.description || ''}</p>
-      <p><i>${item.date ? new Date(item.date).toLocaleDateString() : ''}</i></p>
-      ${item.image_url ? `<img src="${item.image_url}" alt="${item.item_name}" />` : ''}
-    `
-    itemsList.appendChild(div)
-  })
 }
 
 // ---------------- Initial load ----------------
