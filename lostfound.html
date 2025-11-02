@@ -54,24 +54,36 @@
        <br>Maybe you've found something,<br>
        post it on here and give it to the office
       </div>
-      <form id="lostForm">
-        <input type="text" id="item_name" placeholder="Item name" required>
-        <textarea id="description" placeholder="Description" required></textarea>
-        <select id="lost_or_found" required>
-          <option value="">Lost or Found?</option>
+      <form id="lostFoundForm">
+        <label>Item Name:</label>
+        <input type="text" id="item_name" required>
+    
+        <label>Description:</label>
+        <textarea id="description"></textarea>
+    
+        <label>Lost or Found:</label>
+        <select id="lost_or_found">
           <option value="Lost">Lost</option>
           <option value="Found">Found</option>
         </select>
-        <input type="date" id="date" required>
-        <input type="text" id="location" placeholder="Location" required>
-        <input type="text" id="user_id" placeholder="Your name or ID" required>
-        <input type="file" id="image" accept="image/*" required>
-        <button type="submit">Upload Item</button>
+    
+        <label>Date:</label>
+        <input type="date" id="date">
+    
+        <label>Location:</label>
+        <input type="text" id="location">
+    
+        <label>Upload Image:</label>
+<input type="file" id="image_file" accept="image/*">
+
+    
+        <button type="submit">Submit</button>
       </form>
     
-      <h2>Recently Uploaded Items</h2>
-      <div id="items"></div>
+      <p id="message"></p>
     
+      <h2>All Items</h2>
+      <div id="itemsList"></div>
        
   
     <footer>

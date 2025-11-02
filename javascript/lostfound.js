@@ -1,64 +1,78 @@
 import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm'
 
-// 🗝️ Replace these with your own Supabase project values
-const SUPABASE_URL = 'https://YOUR_PROJECT.supabase.co'
-const SUPABASE_KEY = 'YOUR_PUBLIC_ANON_KEY'
-const supabase = createClient(SUPABASE_URL, SUPABASE_KEY)
+// Connect to Supabase
+const SUPABASE_URL = 'https://yoeydqywoxmslfyxvzkc.supabase.co'
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlvZXlkcXl3b3htc2xmeXh2emtjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjA0ODY4MDAsImV4cCI6MjA3NjA2MjgwMH0.5CRg8qdDk_A16u9PCEWw4CCz3AWv7DtHw_mzmoPqhZ8'
 
-const form = document.getElementById('lostForm')
-const itemsDiv = document.getElementById('items')
+const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
 
+// DOM elements
+const form = document.getElementById('lostFoundForm')
+const message = document.getElementById('message')
+const itemsList = document.getElementById('itemsList')
+const fileInput = document.getElementById('image_file')
+
+// Handle form submission
 form.addEventListener('submit', async (e) => {
   e.preventDefault()
+  message.textContent = 'Uploading...'
 
-  const item_name = document.getElementById('item_name').value
-  const description = document.getElementById('description').value
-  const lost_or_found = document.getElementById('lost_or_found').value
-  const date = document.getElementById('date').value
-  const location = document.getElementById('location').value
-  const user_id = document.getElementById('user_id').value
-  const file = document.getElementById('image').files[0]
+  let imageUrl = ''
 
-  if (!file) return alert('Please select an image.')
+  // Upload image to Supabase Storage if a file is selected
+  if (fileInput.files.length > 0) {
+    const file = fileInput.files[0]
+    const fileName = `${Date.now()}_${file.name}`
 
-  // Upload the image to Supabase Storage
-  const filePath = `images/${Date.now()}_${file.name}`
-  const { data: imageData, error: imageError } = await supabase
-    .storage
-    .from('lostfound-images')
-    .upload(filePath, file)
+    const { data: uploadData, error: uploadError } = await supabase.storage
+      .from('lost-found-images')
+      .upload(fileName, file)
 
-  if (imageError) {
-    console.error(imageError)
-    alert('Image upload failed.')
-    return
+    if (uploadError) {
+      console.error('Upload error:', uploadError)
+      message.textContent = '❌ Error uploading image!'
+      return
+    }
+
+    // Get public URL
+    const { publicURL, error: urlError } = supabase
+      .storage
+      .from('lost-found-images')
+      .getPublicUrl(fileName)
+
+    if (urlError) {
+      console.error('URL error:', urlError)
+      message.textContent = '❌ Error getting image URL!'
+      return
+    }
+
+    imageUrl = publicURL
   }
 
-  // Insert new record into your Supabase table
-  const { error } = await supabase
-    .from('lost_found_items')
-    .insert([{
-      item_name,
-      description,
-      lost_or_found,
-      date,
-      location,
-      user_id,
-      image_url: filePath
-    }])
+  // Prepare data to insert into Supabase table
+  const itemData = {
+    item_name: document.getElementById('item_name').value,
+    description: document.getElementById('description').value,
+    lost_or_found: document.getElementById('lost_or_found').value,
+    date: document.getElementById('date').value,
+    location: document.getElementById('location').value,
+    image_url: imageUrl
+  }
+
+  // Insert into Supabase table
+  const { error } = await supabase.from('lost_found_items').insert([itemData])
 
   if (error) {
-    console.error(error)
-    alert('Error saving item.')
-    return
+    console.error('Insert error:', error)
+    message.textContent = '❌ Error saving item!'
+  } else {
+    message.textContent = '✅ Item uploaded successfully!'
+    form.reset()
+    loadItems()
   }
-
-  alert('Item uploaded successfully!')
-  form.reset()
-  loadItems()
 })
 
-// Load and display all items
+// Load items from Supabase and display them
 async function loadItems() {
   const { data, error } = await supabase
     .from('lost_found_items')
@@ -66,22 +80,24 @@ async function loadItems() {
     .order('id', { ascending: false })
 
   if (error) {
-    console.error(error)
+    console.error('Fetch error:', error)
     return
   }
 
-  itemsDiv.innerHTML = data.map(item => `
-    <div class="item">
+  itemsList.innerHTML = ''
+  data.forEach(item => {
+    const div = document.createElement('div')
+    div.className = 'item-card'
+    div.innerHTML = `
       <h3>${item.item_name}</h3>
-      <p>${item.description}</p>
-      <p class="${item.lost_or_found.toLowerCase()}">${item.lost_or_found}</p>
-      <p><strong>Location:</strong> ${item.location}</p>
-      <p><strong>Date:</strong> ${item.date}</p>
-      <p><strong>Added by:</strong> ${item.user_id}</p>
-      ${item.image_url ? `<img src="${SUPABASE_URL}/storage/v1/object/public/lostfound-images/${item.image_url}" alt="${item.item_name}">` : ''}
-    </div>
-  `).join('')
+      <p><strong>${item.lost_or_found}</strong> at ${item.location}</p>
+      <p>${item.description || ''}</p>
+      <p><i>${item.date ? new Date(item.date).toLocaleDateString() : ''}</i></p>
+      ${item.image_url ? `<img src="${item.image_url}" alt="${item.item_name}" />` : ''}
+    `
+    itemsList.appendChild(div)
+  })
 }
 
-// Load all items when page first opens
+// Load items when page loads
 loadItems()
