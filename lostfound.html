@@ -55,27 +55,22 @@
        post it on here and give it to the office
       </div>
       <form id="lostFoundForm">
-        <label>Item Name:</label>
-        <input type="text" id="item_name" required>
-    
-        <label>Description:</label>
-        <textarea id="description"></textarea>
-    
-        <label>Lost or Found:</label>
-        <select id="lost_or_found">
+        <input type="text" id="item_name" placeholder="Item Name" required />
+        <textarea id="description" placeholder="Description"></textarea>
+        <select id="lost_or_found" required>
+          <option value="">Select...</option>
           <option value="Lost">Lost</option>
           <option value="Found">Found</option>
         </select>
-    
-        <label>Date:</label>
-        <input type="date" id="date">
-    
-        <label>Location:</label>
-        <input type="text" id="location">
-    
-        <label>Upload Image:</label>
-<input type="file" id="image_file" accept="image/*">
-
+        <input type="date" id="date" required />
+        <input type="text" id="location" placeholder="Location" required />
+        <input type="file" id="image_file" accept="image/*" />
+        <button type="submit">Submit</button>
+        <p id="message"></p>
+      </form>
+      
+      <div id="itemsList"></div>
+      
     
         <button type="submit">Submit</button>
       </form>
