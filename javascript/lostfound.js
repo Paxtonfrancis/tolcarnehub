@@ -1,18 +1,18 @@
 import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm'
 
-// Connect to Supabase
+// ---------------- Supabase connection ----------------
 const SUPABASE_URL = 'https://yoeydqywoxmslfyxvzkc.supabase.co'
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlvZXlkcXl3b3htc2xmeXh2emtjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjA0ODY4MDAsImV4cCI6MjA3NjA2MjgwMH0.5CRg8qdDk_A16u9PCEWw4CCz3AWv7DtHw_mzmoPqhZ8'
 
 const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
 
-// DOM elements
+// ---------------- DOM elements ----------------
 const form = document.getElementById('lostFoundForm')
 const message = document.getElementById('message')
 const itemsList = document.getElementById('itemsList')
 const fileInput = document.getElementById('image_file')
 
-// Handle form submission
+// ---------------- Form submission ----------------
 form.addEventListener('submit', async (e) => {
   e.preventDefault()
   message.textContent = 'Uploading...'
@@ -24,9 +24,9 @@ form.addEventListener('submit', async (e) => {
     const file = fileInput.files[0]
     const fileName = `${Date.now()}_${file.name}`
 
-    const { data: uploadData, error: uploadError } = await supabase.storage
+    const { error: uploadError } = await supabase.storage
       .from('lost-found-images')
-      .upload(fileName, file)
+      .upload(fileName, file, { upsert: true })
 
     if (uploadError) {
       console.error('Upload error:', uploadError)
@@ -72,7 +72,7 @@ form.addEventListener('submit', async (e) => {
   }
 })
 
-// Load items from Supabase and display them
+// ---------------- Load items ----------------
 async function loadItems() {
   const { data, error } = await supabase
     .from('lost_found_items')
@@ -81,6 +81,7 @@ async function loadItems() {
 
   if (error) {
     console.error('Fetch error:', error)
+    itemsList.innerHTML = '<p>Error loading items.</p>'
     return
   }
 
@@ -99,5 +100,5 @@ async function loadItems() {
   })
 }
 
-// Load items when page loads
+// ---------------- Initial load ----------------
 loadItems()

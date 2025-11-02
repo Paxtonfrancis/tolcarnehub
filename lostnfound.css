@@ -1,195 +1,32 @@
-/* General Reset & Fonts */
-html, body {
-  margin: 0;
-  padding: 0;
-  font-family: Garamond, serif;
-  background-color: #d6edf999;
-  color: #000;
-}
-
-/* Headings */
-h1 {
-  text-align: center;
-  font-size: 50px;
-  color: white;
-  margin: 20px 0;
-  font-family: Garamond;
-}
-
-h2 {
-  text-align: center;
-  font-size: 35px;
-  color: #2183b1;
-  margin-top: 30px;
-}
-
-h3 {
-  flex-grow: 1;
-  margin: 0;
-  text-align: center;
-  font-family: Garamond;
-  font-size: 50px;
-  color: white;
-}
-
-/* Nav & Sidebar (your existing style) */
-nav {
-  overflow: visible;
-  background-color: #2183b1;
-  position: sticky;
-  top: 0;
-  z-index: 2;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 20px;
-  height: 60px;
-}
-
-.sidebar {
-  height: 100%;
-  width: 0;
-  position: fixed;
-  z-index: 1;
-  top: 0;
-  right: 0; 
-  background-color: #2183b1;
-  overflow-x: hidden;
-  transition: 0.5s;
-  padding-top: 60px;
-}
-
-.sidebar a {
-  padding: 8px 32px;
-  text-decoration: none;
-  font-size: 25px;
-  color: white;
-  display: block;
-  transition: 0.3s;
-}
-
-.sidebar a:hover {
-  color: #f1f1f1;
-}
-
-.sidebar .closebtn {
-  position: absolute;
-  top: 0;
-  right: 25px;
-  font-size: 36px;
-}
-
-.openbtn {
-  font-size: 50px;
-  cursor: pointer;
-  background-color: transparent;
-  color: white;
-  padding: 10px 15px;
-  border: none;
-}
-
-/* Footer */
-footer {
-  background-color: #2183b1;
-  color: white;
-  text-align: center;
-  padding: 20px;
-  margin-top: 40px;
-  width: 100%;
-  clear: both;
-  box-sizing: border-box;
-}
-
-footer a {
-  color: white;
-  text-decoration: underline;
-}
-
-/* Form Styles */
-form#lostFoundForm {
-  background: rgba(255, 255, 255, 0.9);
-  padding: 20px;
+#lostFoundForm {
   max-width: 500px;
   margin: 20px auto;
-  border-radius: 10px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 10px;
 }
 
-form#lostFoundForm label {
-  font-weight: bold;
-  margin-bottom: 4px;
-}
-
-form#lostFoundForm input[type="text"],
-form#lostFoundForm input[type="date"],
-form#lostFoundForm select,
-form#lostFoundForm textarea,
-form#lostFoundForm input[type="file"] {
+#lostFoundForm input, 
+#lostFoundForm textarea, 
+#lostFoundForm select, 
+#lostFoundForm button {
   padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  font-family: Garamond;
   font-size: 16px;
 }
 
-form#lostFoundForm button {
-  background-color: #2183b1;
-  color: white;
-  border: none;
-  padding: 12px;
-  border-radius: 6px;
-  font-size: 18px;
-  cursor: pointer;
-  margin-top: 10px;
-}
-
-form#lostFoundForm button:hover {
-  background-color: #005f87;
-}
-
-#message {
-  text-align: center;
-  font-weight: bold;
-  margin-top: 10px;
-}
-
-/* Items List */
 #itemsList {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  margin: 20px;
-  gap: 20px;
+  max-width: 700px;
+  margin: 20px auto;
 }
 
 .item-card {
-  background: white;
-  padding: 15px;
-  width: 250px;
-  border-radius: 10px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-  text-align: center;
+  border: 1px solid #2183b1;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
 }
 
 .item-card img {
   max-width: 100%;
-  height: auto;
-  display: block;
-  margin: 10px auto;
-  border-radius: 6px;
-}
-
-/* Responsive */
-@media screen and (max-width: 600px) {
-  form#lostFoundForm {
-    width: 90%;
-    padding: 15px;
-  }
-
-  .item-card {
-    width: 90%;
-  }
+  margin-top: 10px;
 }

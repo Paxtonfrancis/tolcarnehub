@@ -49,37 +49,31 @@
     
   </nav>
  
-    <div class="tagline">
-       Lost something? 
-       <br>Maybe you've found something,<br>
-       post it on here and give it to the office
-      </div>
-      <form id="lostFoundForm">
-        <input type="text" id="item_name" placeholder="Item Name" required />
-        <textarea id="description" placeholder="Description"></textarea>
-        <select id="lost_or_found" required>
-          <option value="">Select...</option>
-          <option value="Lost">Lost</option>
-          <option value="Found">Found</option>
-        </select>
-        <input type="date" id="date" required />
-        <input type="text" id="location" placeholder="Location" required />
-        <input type="file" id="image_file" accept="image/*" />
-        <button type="submit">Submit</button>
-        <p id="message"></p>
-      </form>
-      
-      <div id="itemsList"></div>
-      
-    
-        <button type="submit">Submit</button>
-      </form>
-    
-      <p id="message"></p>
-    
-      <h2>All Items</h2>
-      <div id="itemsList"></div>
-       
+  <div class="tagline">
+    Lost something? <br>
+    Maybe you've found something,<br>
+    post it here and give it to the office
+  </div>
+  
+  <!-- Lost & Found Form -->
+  <form id="lostFoundForm">
+    <input type="text" id="item_name" placeholder="Item Name" required />
+    <textarea id="description" placeholder="Description"></textarea>
+    <select id="lost_or_found" required>
+      <option value="">Select...</option>
+      <option value="Lost">Lost</option>
+      <option value="Found">Found</option>
+    </select>
+    <input type="date" id="date" required />
+    <input type="text" id="location" placeholder="Location" required />
+    <input type="file" id="image_file" accept="image/*" />
+    <button type="submit">Submit</button>
+  </form>
+  
+  <p id="message"></p>
+  
+  <h2>All Items</h2>
+  <div id="itemsList"></div>
   
     <footer>
         <p>AS91893 Develop a Digital Media Outcome 4cr</p>
