@@ -1,6 +1,6 @@
+// ---------------- Supabase connection ----------------
 import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm'
 
-// ---------------- Supabase connection ----------------
 const SUPABASE_URL = 'https://yoeydqywoxmslfyxvzkc.supabase.co'
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlvZXlkcXl3b3htc2xmeXh2emtjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjA0ODY4MDAsImV4cCI6MjA3NjA2MjgwMH0.5CRg8qdDk_A16u9PCEWw4CCz3AWv7DtHw_mzmoPqhZ8'
 
@@ -23,18 +23,24 @@ form.addEventListener('submit', async (e) => {
     // ---------------- Image upload ----------------
     if (fileInput.files.length > 0) {
       const file = fileInput.files[0]
-      const fileName = `${Date.now()}_${file.name}`
+      
+      // Sanitize file name for Supabase
+      const safeFileName = `${Date.now()}_${file.name
+        .replace(/\s+/g, '_')   // replace spaces with _
+        .replace(/:/g, '-')     // replace colon with -
+        .replace(/[^\w.-]/g,'') // remove other invalid chars
+      }`
 
       const { error: uploadError } = await supabase.storage
         .from('lost-found-images')
-        .upload(fileName, file, { upsert: true })
+        .upload(safeFileName, file, { upsert: true })
 
       if (uploadError) throw uploadError
 
       const { publicURL, error: urlError } = supabase
         .storage
         .from('lost-found-images')
-        .getPublicUrl(fileName)
+        .getPublicUrl(safeFileName)
 
       if (urlError) throw urlError
 
