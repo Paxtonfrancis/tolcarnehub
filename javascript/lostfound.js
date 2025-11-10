@@ -72,7 +72,7 @@ form.addEventListener('submit', async (e) => {
 
   } catch (err) {
     console.error('❌ Error:', err)
-    message.textContent = '❌ Error saving item! Check console for details.'
+    message.textContent = '❌ Error saving item! Contact Admin'
   }
 })
 
@@ -95,9 +95,21 @@ async function loadItems() {
     data.forEach(item => {
       const div = document.createElement('div')
       div.className = 'item-card'
+
+      // ---------------- Color coding ----------------
+      if (item.lost_or_found === 'Lost') {
+        div.style.border = '2px solid #e74c3c'   // red for Lost
+        div.style.backgroundColor = '#fdecea'
+      } else if (item.lost_or_found === 'Found') {
+        div.style.border = '2px solid #27ae60'   // green for Found
+        div.style.backgroundColor = '#eafaf1'
+      }
+
+      // ---------------- Card content ----------------
       div.innerHTML = `
-        <h3>${item.item_name}</h3>
-        <p><strong>${item.lost_or_found}</strong> at ${item.location}</p>
+        <h3>${item.lost_or_found} Item</h3>   <!-- LOST / FOUND title -->
+        <h4>${item.item_name}</h4>             <!-- actual item name -->
+        <p><strong>Location:</strong> ${item.location}</p>
         <p>${item.description || ''}</p>
         <p><i>${item.date ? new Date(item.date).toLocaleDateString() : ''}</i></p>
         ${item.image_url ? `<img src="${item.image_url}" alt="${item.item_name}" style="max-width: 250px; border-radius: 10px;" />` : ''}
