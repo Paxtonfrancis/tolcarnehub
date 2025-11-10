@@ -109,8 +109,8 @@ async function loadItems() {
       div.innerHTML = `
         <h3>${item.lost_or_found} Item</h3>   <!-- LOST / FOUND title -->
         <h4>${item.item_name}</h4>             <!-- actual item name -->
-        <p><strong>Location:</strong> ${item.location}</p>
         <p>${item.description || ''}</p>
+        <p><strong>Location:</strong> ${item.location}</p>
         <p><i>${item.date ? new Date(item.date).toLocaleDateString() : ''}</i></p>
         ${item.image_url ? `<img src="${item.image_url}" alt="${item.item_name}" style="max-width: 250px; border-radius: 10px;" />` : ''}
       `
@@ -118,7 +118,7 @@ async function loadItems() {
     })
 
   } catch (err) {
-    console.error('❌ Fetch error:', err)
+    console.error('❌ Error:', err)
     itemsList.innerHTML = '<p>Error loading items.</p>'
   }
 }

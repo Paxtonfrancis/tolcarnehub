@@ -26,7 +26,7 @@
 
 /* ---------------- Item Cards ---------------- */
 .item-card {
-  background-color: #ffffffdd; 
+  background-color: black; 
   border-radius: 12px;
   padding: 15px;
   width: calc(25% - 20px); /* 4 cards per row */
@@ -63,21 +63,6 @@
   margin-top: 10px;
   border-radius: 8px;
   border: 1px solid #ccc;
-}
-
-/* ---------------- Delete Button ---------------- */
-.delete-btn {
-  margin-top: 10px;
-  background-color: #e74c3c; 
-  color: white; 
-  border: none; 
-  padding: 5px 10px; 
-  border-radius: 5px; 
-  cursor: pointer;
-}
-
-.delete-btn:hover {
-  background-color: #c0392b;
 }
 
 /* ---------------- Color Coding Lost/Found ---------------- */
