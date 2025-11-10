@@ -1,6 +1,7 @@
-// ---------------- Supabase connection ----------------
+// ---------------- Import Supabase ----------------
 import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm'
 
+// ---------------- Supabase connection ----------------
 const SUPABASE_URL = 'https://yoeydqywoxmslfyxvzkc.supabase.co'
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlvZXlkcXl3b3htc2xmeXh2emtjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjA0ODY4MDAsImV4cCI6MjA3NjA2MjgwMH0.5CRg8qdDk_A16u9PCEWw4CCz3AWv7DtHw_mzmoPqhZ8'
 
@@ -23,32 +24,30 @@ form.addEventListener('submit', async (e) => {
     // ---------------- Image upload ----------------
     if (fileInput.files.length > 0) {
       const file = fileInput.files[0]
-      
-      // Sanitize file name for Supabase
-      const safeFileName = `${Date.now()}_${file.name
-        .replace(/\s+/g, '_')   // replace spaces with _
-        .replace(/:/g, '-')     // replace colon with -
-        .replace(/[^\w.-]/g,'') // remove other invalid chars
-      }`
+
+      // Clean filename to remove invalid characters
+      const cleanName = file.name.replace(/[^a-zA-Z0-9._-]/g, '_')
+      const fileName = `${Date.now()}_${cleanName}`
 
       const { error: uploadError } = await supabase.storage
         .from('lost-found-images')
-        .upload(safeFileName, file, { upsert: true })
+        .upload(fileName, file, { upsert: true })
 
       if (uploadError) throw uploadError
 
-      const { publicURL, error: urlError } = supabase
+      // Get public URL
+      const { data: publicData, error: urlError } = supabase
         .storage
         .from('lost-found-images')
-        .getPublicUrl(safeFileName)
+        .getPublicUrl(fileName)
 
       if (urlError) throw urlError
 
-      imageUrl = publicURL
-      console.log('Image uploaded, URL:', imageUrl)
+      imageUrl = publicData.publicUrl
+      console.log('✅ Image uploaded successfully:', imageUrl)
     }
 
-    // ---------------- Insert data ----------------
+    // ---------------- Insert data into database ----------------
     const itemData = {
       item_name: document.getElementById('item_name').value,
       description: document.getElementById('description').value,
@@ -61,7 +60,7 @@ form.addEventListener('submit', async (e) => {
     const { data, error } = await supabase
       .from('lost_found_items')
       .insert([itemData])
-      .select() // returns inserted rows
+      .select()
 
     console.log('Insert response:', data, error)
 
@@ -72,7 +71,7 @@ form.addEventListener('submit', async (e) => {
     loadItems()
 
   } catch (err) {
-    console.error('Error:', err)
+    console.error('❌ Error:', err)
     message.textContent = '❌ Error saving item! Check console for details.'
   }
 })
@@ -101,13 +100,13 @@ async function loadItems() {
         <p><strong>${item.lost_or_found}</strong> at ${item.location}</p>
         <p>${item.description || ''}</p>
         <p><i>${item.date ? new Date(item.date).toLocaleDateString() : ''}</i></p>
-        ${item.image_url ? `<img src="${item.image_url}" alt="${item.item_name}" />` : ''}
+        ${item.image_url ? `<img src="${item.image_url}" alt="${item.item_name}" style="max-width: 250px; border-radius: 10px;" />` : ''}
       `
       itemsList.appendChild(div)
     })
 
   } catch (err) {
-    console.error('Fetch error:', err)
+    console.error('❌ Fetch error:', err)
     itemsList.innerHTML = '<p>Error loading items.</p>'
   }
 }
