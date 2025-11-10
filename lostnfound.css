@@ -15,6 +15,13 @@
   font-size: 16px;
 }
 
+#lostFoundForm button{
+  background-color: #2183b1;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
 /* ---------------- Items Container ---------------- */
 #itemsList {
   display: flex;
@@ -45,7 +52,6 @@
   font-size: 20px;
   text-align: center;
   color: black;
-  background-color: black;
 }
 
 .item-card h4 {
