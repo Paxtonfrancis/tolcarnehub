@@ -1,19 +1,16 @@
-// ---------------- Import Supabase ----------------
 import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm'
 
-// ---------------- Supabase connection ----------------
 const SUPABASE_URL = 'https://yoeydqywoxmslfyxvzkc.supabase.co'
-const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlvZXlkcXl3b3htc2xmeXh2emtjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjA0ODY4MDAsImV4cCI6MjA3NjA2MjgwMH0.5CRg8qdDk_A16u9PCEWw4CCz3AWv7DtHw_mzmoPqhZ8'
+const SUPABASE_ANON_KEY = 'YOUR_ANON_KEY_HERE'
 
 const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
 
-// ---------------- DOM elements ----------------
 const form = document.getElementById('lostFoundForm')
 const message = document.getElementById('message')
 const itemsList = document.getElementById('itemsList')
 const fileInput = document.getElementById('image_file')
 
-// ---------------- Form submission ----------------
+// Handle form submission
 form.addEventListener('submit', async (e) => {
   e.preventDefault()
   message.textContent = 'Uploading...'
@@ -21,11 +18,8 @@ form.addEventListener('submit', async (e) => {
   let imageUrl = ''
 
   try {
-    // ---------------- Image upload ----------------
     if (fileInput.files.length > 0) {
       const file = fileInput.files[0]
-
-      // Clean filename to remove invalid characters
       const cleanName = file.name.replace(/[^a-zA-Z0-9._-]/g, '_')
       const fileName = `${Date.now()}_${cleanName}`
 
@@ -35,7 +29,6 @@ form.addEventListener('submit', async (e) => {
 
       if (uploadError) throw uploadError
 
-      // Get public URL
       const { data: publicData, error: urlError } = supabase
         .storage
         .from('lost-found-images')
@@ -44,10 +37,8 @@ form.addEventListener('submit', async (e) => {
       if (urlError) throw urlError
 
       imageUrl = publicData.publicUrl
-      console.log('✅ Image uploaded successfully:', imageUrl)
     }
 
-    // ---------------- Insert data into database ----------------
     const itemData = {
       item_name: document.getElementById('item_name').value,
       description: document.getElementById('description').value,
@@ -62,8 +53,6 @@ form.addEventListener('submit', async (e) => {
       .insert([itemData])
       .select()
 
-    console.log('Insert response:', data, error)
-
     if (error) throw error
 
     message.textContent = '✅ Item uploaded successfully!'
@@ -71,12 +60,12 @@ form.addEventListener('submit', async (e) => {
     loadItems()
 
   } catch (err) {
-    console.error('❌ Error:', err)
+    console.error(err)
     message.textContent = '❌ Error saving item! Contact Admin'
   }
 })
 
-// ---------------- Load items ----------------
+// Load items from Supabase
 async function loadItems() {
   try {
     const { data, error } = await supabase
@@ -96,19 +85,17 @@ async function loadItems() {
       const div = document.createElement('div')
       div.className = 'item-card'
 
-      // ---------------- Color coding ----------------
       if (item.lost_or_found === 'Lost') {
-        div.style.border = '2px solid #e74c3c'   // red for Lost
+        div.style.border = '2px solid #e74c3c'
         div.style.backgroundColor = '#fdecea'
       } else if (item.lost_or_found === 'Found') {
-        div.style.border = '2px solid #27ae60'   // green for Found
+        div.style.border = '2px solid #27ae60'
         div.style.backgroundColor = '#eafaf1'
       }
 
-      // ---------------- Card content ----------------
       div.innerHTML = `
-        <h3>${item.lost_or_found} Item</h3>   <!-- LOST / FOUND title -->
-        <h4>${item.item_name}</h4>             <!-- actual item name -->
+        <h3>${item.lost_or_found} Item</h3>
+        <h4>${item.item_name}</h4>
         <p>${item.description || ''}</p>
         <p><strong>Location:</strong> ${item.location}</p>
         <p><i>${item.date ? new Date(item.date).toLocaleDateString() : ''}</i></p>
@@ -118,10 +105,9 @@ async function loadItems() {
     })
 
   } catch (err) {
-    console.error('❌ Error:', err)
+    console.error(err)
     itemsList.innerHTML = '<p>Error loading items.</p>'
   }
 }
 
-// ---------------- Initial load ----------------
 loadItems()

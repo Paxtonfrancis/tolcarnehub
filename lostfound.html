@@ -2,93 +2,82 @@
 <html lang="en">
 
 <head>
-    <title>Tolcarne Hub</title>
+    <title>Tolcarne Hub - Lost & Found</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
     <link href="main.css" rel="stylesheet" type="text/css">
     <link href="home.css" rel="stylesheet" type="text/css">
     <link href="lostnfound.css" rel="stylesheet" type="text/css">
-
+    
     <link href="images/favicon.png" rel="shortcut icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
 </head>
 
 <body id="home">
 
-  <nav>
-    <div class="logo">
-      <a href="index.html"> 
-      <img src="images/logo.png" alt="Tolcarne Logo" />
-    </a>
-    </div> 
-  
-    <h3>Tolcarne Hub</h3>
-    
-    <div id="mySidebar" class="sidebar">
-      <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
-      <a href="index.html">Home</a>
-      <br>
-      <a href="lostfound.html"> Lost + Found </a>   
-    <br>
-      <a href="dinnermenu.html">Dinner Menu</a>   
-    <br>
-      <a href="photos.html">Photos </a>   
-      <br>
-      <a href="FAQ.html">FAQ </a>   
-      <br>
-      <a href="contact.html">Contact </a> 
-      
-    </div>
-    
-    <div id="main">
-      <button class="openbtn" onclick="openNav()">☰</button>  
-     
+    <nav>
+        <div class="logo">
+            <a href="index.html"> 
+                <img src="images/logo.png" alt="Tolcarne Logo" />
+            </a>
+        </div> 
 
+        <h3>Tolcarne Hub</h3>
 
+        <div id="mySidebar" class="sidebar">
+            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+            <a href="index.html">Home</a>
+            <br>
+            <a href="lostfound.html"> Lost + Found </a>   
+            <br>
+            <a href="dinnermenu.html">Dinner Menu</a>   
+            <br>
+            <a href="photos.html">Photos</a>   
+            <br>
+            <a href="FAQ.html">FAQ</a>   
+            <br>
+            <a href="contact.html">Contact</a> 
+        </div>
+
+        <div id="main">
+            <button class="openbtn" onclick="openNav()">☰</button>  
+        </div>
+    </nav>
+
+    <div class="tagline">
+        Lost something? <br>
+        Maybe you've found something,<br>
+        post it here and give it to the office
     </div>
-       
-    
-  </nav>
- 
-  <div class="tagline">
-    Lost something? <br>
-    Maybe you've found something,<br>
-    post it here and give it to the office
-  </div>
-  
-  <!-- Lost & Found Form -->
-  <form id="lostFoundForm">
-    <input type="text" id="item_name" placeholder="Item Name" required />
-    <textarea id="description" placeholder="Description"></textarea>
-    <select id="lost_or_found" required>
-      <option value="">Select...</option>
-      <option value="Lost">Lost</option>
-      <option value="Found">Found</option>
-    </select>
-    <input type="date" id="date" required />
-    <input type="text" id="location" placeholder="Location" required />
-    <input type="file" id="image_file" accept="image/*" />
-    <button type="submit">Submit</button>
-  </form>
-  
-  <p id="message"></p>
-  
-  <h2>All Items</h2>
-  <div id="itemsList"></div>
-  
+
+    <form id="lostFoundForm">
+        <input type="text" id="item_name" placeholder="Item Name" required />
+        <textarea id="description" placeholder="Description"></textarea>
+        <select id="lost_or_found" required>
+            <option value="">Select...</option>
+            <option value="Lost">Lost</option>
+            <option value="Found">Found</option>
+        </select>
+        <input type="date" id="date" required />
+        <input type="text" id="location" placeholder="Location" required />
+        <input type="file" id="image_file" accept="image/*" />
+        <button type="submit">Submit</button>
+    </form>
+
+    <p id="message"></p>
+
+    <h2>All Items</h2>
+    <div id="itemsList"></div>
+
     <footer>
         <p>AS91893 Develop a Digital Media Outcome 4cr</p>
-        <p> &copy; Paxton Francis &#128526; Te Kura </p>
+        <p>&copy; Paxton Francis &#128526; Te Kura</p>
         <p>Contact information: <a href="mailto:paxtonfrancis@shcs.school.nz">Paxton Francis</a>.</p>
-
-        
-
     </footer>
 
 </body>
 
-
-<script src="javascript/home.js"> </script>
+<script src="javascript/home.js"></script>
 <script type="module" src="javascript/lostfound.js"></script>
 </html>
