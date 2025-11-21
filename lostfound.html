@@ -2,31 +2,34 @@
 <html lang="en">
 
 <head>
-    <title>Tolcarne Hub - Lost & Found</title>
+    <title>Tolcarne Hub - Lost & Found</title> 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+
+    <!-- Link to CSS stylesheets -->
     <link href="main.css" rel="stylesheet" type="text/css">
     <link href="home.css" rel="stylesheet" type="text/css">
     <link href="lostnfound.css" rel="stylesheet" type="text/css">
-    
-    <link href="images/favicon.png" rel="shortcut icon">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <link href="images/favicon.png" rel="shortcut icon"> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> <!-- Font Awesome icons -->
 </head>
 
 <body id="home">
 
+    <!-- ---------------- Navigation Bar ---------------- -->
     <nav>
         <div class="logo">
             <a href="index.html"> 
-                <img src="images/logo.png" alt="Tolcarne Logo" />
+                <img src="images/logo.png" alt="Tolcarne Logo" /> <!-- School logo linking to homepage -->
             </a>
         </div> 
 
-        <h3>Tolcarne Hub</h3>
+        <h3>Tolcarne Hub</h3> <!-- Website name -->
 
+        <!-- Sidebar menu -->
         <div id="mySidebar" class="sidebar">
-            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a> <!-- Close button -->
             <a href="index.html">Home</a>
             <br>
             <a href="lostfound.html"> Lost + Found </a>   
@@ -40,44 +43,50 @@
             <a href="contact.html">Contact</a> 
         </div>
 
+        <!-- Button to open the sidebar -->
         <div id="main">
             <button class="openbtn" onclick="openNav()">☰</button>  
         </div>
     </nav>
 
+    <!-- ---------------- Page Tagline ---------------- -->
     <div class="tagline">
         Lost something? <br>
         Maybe you've found something,<br>
         post it here and give it to the office
     </div>
 
+    <!-- ---------------- Lost & Found Form ---------------- -->
     <form id="lostFoundForm">
-        <input type="text" id="item_name" placeholder="Item Name" required />
-        <textarea id="description" placeholder="Description"></textarea>
-        <select id="lost_or_found" required>
+        <input type="text" id="item_name" placeholder="Item Name" required /> <!-- Item name input -->
+        <textarea id="description" placeholder="Description"></textarea> <!-- Optional description -->
+        <select id="lost_or_found" required> <!-- Dropdown to choose Lost or Found -->
             <option value="">Select...</option>
             <option value="Lost">Lost</option>
             <option value="Found">Found</option>
         </select>
-        <input type="date" id="date" required />
-        <input type="text" id="location" placeholder="Location" required />
-        <input type="file" id="image_file" accept="image/*" />
-        <button type="submit">Submit</button>
+        <input type="date" id="date" required /> <!-- Date of lost/found -->
+        <input type="text" id="location" placeholder="Location" required /> <!-- Location input -->
+        <input type="file" id="image_file" accept="image/*" /> <!-- Optional image upload -->
+        <button type="submit">Submit</button> <!-- Submit form -->
     </form>
 
-    <p id="message"></p>
+    <p id="message"></p> <!-- Feedback message (success/error) -->
 
+    <!-- ---------------- Display All Items ---------------- -->
     <h2>All Items</h2>
-    <div id="itemsList"></div>
+    <div id="itemsList"></div> <!-- Container where items are displayed dynamically -->
 
+    <!-- ---------------- Footer ---------------- -->
     <footer>
-        <p>AS91893 Develop a Digital Media Outcome 4cr</p>
-        <p>&copy; Paxton Francis &#128526; Te Kura</p>
-        <p>Contact information: <a href="mailto:paxtonfrancis@shcs.school.nz">Paxton Francis</a>.</p>
+        <p>AS91893 Develop a Digital Media Outcome 4cr</p> <!-- Assessment info -->
+        <p>&copy; Paxton Francis &#128526; Te Kura</p> <!-- Author info with emoji -->
+        <p>Contact information: <a href="mailto:paxtonfrancis@shcs.school.nz">Paxton Francis</a>.</p> <!-- Email link -->
     </footer>
 
 </body>
 
-<script src="javascript/home.js"></script>
-<script type="module" src="javascript/lostfound.js"></script>
+<!-- ---------------- JavaScript Files ---------------- -->
+<script src="javascript/home.js"></script> 
+<script type="module" src="javascript/lostfound.js"></script> 
 </html>
