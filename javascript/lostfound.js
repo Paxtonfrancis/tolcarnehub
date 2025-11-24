@@ -15,6 +15,23 @@ const form = document.getElementById('lostFoundForm')
 const message = document.getElementById('message') // Area to show success/error messages
 const itemsList = document.getElementById('itemsList') // Container for displaying items
 const fileInput = document.getElementById('image_file') // File input for images
+const dateInput = document.getElementById('date'); // Date input field
+
+// -------------------------------
+// AUTO-FILL TODAY AND RESTRICT DATE PICKER
+// -------------------------------
+document.addEventListener('DOMContentLoaded', () => {
+  const today = new Date();
+  const todayString = today.toISOString().split('T')[0];
+
+  const pastLimit = new Date(today);
+  pastLimit.setDate(today.getDate() - 31);
+  const pastLimitString = pastLimit.toISOString().split('T')[0];
+
+  dateInput.value = todayString;       // Auto-fill today
+  dateInput.max = todayString;         // Block future dates
+  dateInput.min = pastLimitString;     // Block dates older than 31 days
+});
 
 // Listen for when the form is submitted
 form.addEventListener('submit', async (e) => {
