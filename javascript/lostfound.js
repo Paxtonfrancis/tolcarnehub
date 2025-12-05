@@ -4,7 +4,7 @@ import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js
 
 // Supabase project URL and anonymous/public key
 const SUPABASE_URL = 'https://yoeydqywoxmslfyxvzkc.supabase.co'
-const SUPABASE_ANON_KEY = 'sb_publishable_kSJrjfsoYrYMZiJJDvbSgg_gBBxWRz1'
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlvZXlkcXl3b3htc2xmeXh2emtjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjA0ODY4MDAsImV4cCI6MjA3NjA2MjgwMH0.5CRg8qdDk_A16u9PCEWw4CCz3AWv7DtHw_mzmoPqhZ8'
 
 // Create a Supabase client instance to interact with database and storage
 const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
